@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-index-home',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index-home.component.css']
 })
 export class IndexHomeComponent implements OnInit {
+  loginUserId: any = "";
+  users: any = [];
 
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
+    this.loginUserId = this.userService.getUserId();
+
+    this.userService.getAllUsers()
+      .subscribe((users) => { this.users = users });
+
+    
   }
 
 }

@@ -28,9 +28,8 @@ const findUserExists = async (userId) => {
 
 const findAllUsers = async (loginUser) => {
     try {
-        return await User.find(
-            { _id: { $ne: loginUser } }
-            );
+        return await User.find( { _id: { $ne: loginUser } })
+                        .select(['-password', '-date', '-__v']);
     } catch (err) {
         return null;
     }

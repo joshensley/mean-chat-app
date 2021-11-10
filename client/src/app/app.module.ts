@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
 
 import { AuthGuard } from './services/auth/auth-guard.service';
 import { RegisterLoginGuard } from './services/auth/register-login-guard.service';
@@ -25,6 +26,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { LogoutComponent } from './components/auth/logout/logout.component';
 import { IndexHomeComponent } from './components/main/home/index-home/index-home.component';
 import { NavbarComponent } from './components/fragment/navbar/navbar.component';
+import { IndexConversationComponent } from './components/main/conversation/index-conversation/index-conversation.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -37,7 +39,8 @@ export function tokenGetter() {
     RegisterComponent,
     LogoutComponent,
     IndexHomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    IndexConversationComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ export function tokenGetter() {
     MatButtonModule,
     MatMenuModule,
     MatGridListModule,
+    MatCardModule,
 
     JwtModule.forRoot({
       config: {
