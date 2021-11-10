@@ -1,0 +1,32 @@
+<p>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+            </button> -->
+
+            <button mat-button [matMenuTriggerFor]="menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+            </mat-menu>
+
+            <span>Chat App</span>
+            <span style="color: pink;">{{ isUserLoggedIn }}</span>
+            <span class="example-spacer" style="flex: 1 1 auto;"></span>
+
+            
+            <a *ngIf="!isUserLoggedIn" mat-icon-button class="example-icon" routerLink="/register" aria-label="Example icon-button with heart icon">
+                <mat-icon>app_registration</mat-icon>
+            </a>
+            <a *ngIf="!isUserLoggedIn" mat-icon-button class="example-icon" routerLink="/login"  aria-label="Example icon-button with heart icon">
+                <mat-icon>login</mat-icon>
+            </a>
+            <button *ngIf="isUserLoggedIn" (click)="logout()" mat-icon-button class="example-icon" routerLink="/logout"  aria-label="Example icon-button with share icon">
+                <mat-icon>logout</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</p>
