@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AuthGuard } from './services/auth/auth-guard.service';
 import { RegisterLoginGuard } from './services/auth/register-login-guard.service';
@@ -57,6 +58,7 @@ export function tokenGetter() {
     MatMenuModule,
     MatGridListModule,
     MatCardModule,
+    MatProgressSpinnerModule,
 
     JwtModule.forRoot({
       config: {

@@ -38,12 +38,12 @@ const createConversation = async (loginUser, otherUser) => {
 }
 
 const getMessages = async (conversationId, skip, limit) => {
-    console.log(typeof skip, typeof limit);
     try {
         let messages = Message.find({ conversation: conversationId })
+            .populate('user', ['-avatar_image_title', '-avatar_image_uri', '-password', '-date', '-__v'])
             .sort({date: -1})
-            .skip(skip)
-            .limit(limit);
+            //.skip(skip)
+            //.limit(limit);
 
         return messages;
     } catch (err) {
@@ -59,6 +59,44 @@ const getMessagesCount = async (conversationId) => {
     } catch (err) {
         // no messages found return 0 count
         return 0;
+    }
+}
+
+const getMessagesByDate = async (conversation, lastSendMessageDate, postMessageDate) => {
+    try {
+        
+        // if there are no messages in the conversation
+        // use the message that was just sent
+        if (lastSendMessageDate === undefined) {
+
+            let messages = Message.find({
+                $and: [
+                    { conversation: conversation },
+                    { date: { $gte: postMessageDate } }
+                ]
+            })
+            .populate('user', ['-avatar_image_title', '-avatar_image_uri', '-password', '-date', '-__v'])
+            .sort({date: 1})
+
+            return messages;
+
+        } else {
+            let messages = Message.find({
+                $and: [
+                    { conversation: conversation },
+                    { date: { $gt: lastSendMessageDate } }
+                ]
+            })
+            .populate('user', ['-avatar_image_title', '-avatar_image_uri', '-password', '-date', '-__v'])
+            .sort({date: 1})
+    
+            console.log(messages);
+
+            return messages;
+        }
+
+    } catch (err) {
+        return [];
     }
 }
 
@@ -85,5 +123,6 @@ module.exports = {
     createConversation,
     getMessages,
     getMessagesCount,
+    getMessagesByDate,
     postMessage
 }

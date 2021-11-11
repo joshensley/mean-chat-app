@@ -44,7 +44,7 @@ const getConversation = async (req, res) => {
 const postMessage = async (req, res) => {
     try {
 
-        const { conversation, loginUser, message } = req.body;
+        const { conversation, loginUser, message, lastSentMessageDate } = req.body;
 
         const loginUserExists = await userService.findUserExists(loginUser);
         if (!loginUserExists) {
@@ -53,7 +53,12 @@ const postMessage = async (req, res) => {
 
         const returnedMessage = await conversationService.postMessage(conversation, loginUser, message);
 
-        return res.json(returnedMessage);
+        const messages = await conversationService.getMessagesByDate(
+            conversation, 
+            lastSentMessageDate,
+            returnedMessage.date);
+
+        return res.json(messages);
 
 
     } catch (err) {

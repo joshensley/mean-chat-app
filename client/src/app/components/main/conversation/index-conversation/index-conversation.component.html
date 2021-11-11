@@ -1,1 +1,29 @@
-<p>index-conversation works!</p>
+<div class="container"  >
+    <form class="example-form" (ngSubmit)="onSubmit()">
+      <mat-form-field class="message-width" appearance="fill">
+        <mat-label>Send a Message</mat-label>
+        <textarea matInput placeholder="Ex. It makes me feel..." type="text" [(ngModel)]="message" name="message" id="message"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="button-width" type="submit">Send</button>
+    </form>
+
+    <div class="imessage" *ngIf="loading === false; else elseBlock">
+        <p *ngFor="let text of conversation.messages" 
+            [ngClass]="loginUserId === text.user._id ? 'from-me' : 'from-them'">
+            {{ text.message }}
+        </p>
+    </div>
+   
+
+    
+    <ng-template  #elseBlock>
+      <div class="center">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+
+</div>
+
+
+
+

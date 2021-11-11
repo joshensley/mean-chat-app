@@ -32,6 +32,14 @@ const getMessagesCount = async (conversationId) => {
     }
 }
 
+const getMessagesByDate = async (conversation, lastSendMessageDate, postMessageDate) => {
+    try {
+        return await conversationDb.getMessagesByDate(conversation, lastSendMessageDate, postMessageDate);
+    } catch (err) {
+        throw new Error(err.message);
+    }
+}
+
 const postMessage = async (conversation, loginUser, message) => {
     try {
         return await conversationDb.postMessage(conversation, loginUser, message);
@@ -45,5 +53,6 @@ module.exports = {
     createConversation,
     getMessages,
     getMessagesCount,
+    getMessagesByDate,
     postMessage
 }
