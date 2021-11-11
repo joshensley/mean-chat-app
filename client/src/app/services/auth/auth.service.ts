@@ -36,9 +36,24 @@ export class AuthService {
     this.subjectIsUserLoggedIn.next(this.isUserLoggedIn);
   }
   
-
   checkIsLoggedIn(): Observable<any> {
     return this.subjectIsUserLoggedIn.asObservable();
+  }
+
+  // Get Login User
+  getLoginUser(): Observable<any> {
+
+    const token: any = localStorage.getItem("jwt");
+    const response = this.jwtHelper.decodeToken(token);
+    const userId = response.user.id;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-auth-token': token
+      })
+    }
+
+    return this.http.get<any>(this.apiUrl, httpOptions);
   }
 
   // Login User

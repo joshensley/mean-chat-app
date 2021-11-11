@@ -6,11 +6,10 @@ const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
-const getUserById = async (req, res, next) => {
+const getUserById = async (req, res) => {
     try {
         const user = await authService.getUserById(req.user.id);
         res.json(user);
-        next();
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

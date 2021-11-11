@@ -10,6 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  user: any = { name: "" };
 
   isUserLoggedIn: boolean = false;
   subscription: Subscription;
@@ -30,7 +31,11 @@ export class NavbarComponent implements OnInit {
           .subscribe(value => this.isUserLoggedIn = value);
       }
       
-    })
+    });
+
+    this.authService.getLoginUser()
+      .subscribe((user) => { this.user = user });
+
   }
 
   logout() {

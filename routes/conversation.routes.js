@@ -5,14 +5,8 @@ const { check } = require('express-validator');
 
 const { conversationController } = require('../controllers');
 
-router.get(
-    '/:loginUser/:otherUser', 
-    auth, 
-    conversationController.getConversation);
+router.get('/:loginUser/:otherUser', auth, conversationController.getConversation);
 
-router.post(
-    '/',
-    auth,
-    conversationController.postMessage);
+router.post('/', auth, conversationController.postMessage);
 
 module.exports = router;

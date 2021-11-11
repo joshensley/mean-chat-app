@@ -9,24 +9,26 @@
                 <mat-icon>menu</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item>Item 1</button>
-                <button mat-menu-item>Item 2</button>
+                <a *ngIf="!isUserLoggedIn" mat-menu-item class="example-icon" routerLink="/register" aria-label="Example icon-button with heart icon">
+                    <mat-icon>app_registration</mat-icon>Register
+                </a>
+                <a *ngIf="!isUserLoggedIn" mat-menu-item class="example-icon" routerLink="/login"  aria-label="Example icon-button with heart icon">
+                    <mat-icon>login</mat-icon>Login
+                </a>
+                <a *ngIf="isUserLoggedIn" mat-menu-item routerLink="/"><mat-icon>person</mat-icon>Users</a>
+                <button *ngIf="isUserLoggedIn" (click)="logout()" mat-menu-item class="example-icon" routerLink="/logout"  aria-label="Example icon-button with share icon">
+                    <mat-icon>logout</mat-icon>Logout
+                </button>
             </mat-menu>
 
             <span>Chat App</span>
-            <span style="color: pink;">{{ isUserLoggedIn }}</span>
+            <!-- <span style="color: pink;">{{ user.name }}</span> -->
             <span class="example-spacer" style="flex: 1 1 auto;"></span>
 
             
-            <a *ngIf="!isUserLoggedIn" mat-icon-button class="example-icon" routerLink="/register" aria-label="Example icon-button with heart icon">
-                <mat-icon>app_registration</mat-icon>
-            </a>
-            <a *ngIf="!isUserLoggedIn" mat-icon-button class="example-icon" routerLink="/login"  aria-label="Example icon-button with heart icon">
-                <mat-icon>login</mat-icon>
-            </a>
-            <button *ngIf="isUserLoggedIn" (click)="logout()" mat-icon-button class="example-icon" routerLink="/logout"  aria-label="Example icon-button with share icon">
-                <mat-icon>logout</mat-icon>
-            </button>
+            
+            <span>{{ isUserLoggedIn ? user.name : "" }}</span>
+            
         </mat-toolbar-row>
     </mat-toolbar>
 </p>
